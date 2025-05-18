@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  jupyter:
+    build: .
+    ports:
+      - "8888:8888"
+    volumes:
+      - ../:/workspace
+    depends_on:
+      - db
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/dataengineering
+
+  db:
+    image: postgres:13
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=dataengineering
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ../sql/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+
+volumes:
+  postgres_data:
