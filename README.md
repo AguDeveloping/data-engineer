@@ -1,6 +1,6 @@
 # Proyecto de Ingeniería de Datos
 
-Este proyecto implementa una infraestructura completa de ingeniería de datos utilizando Docker, Jupyter Notebooks, PostgreSQL y Python. Proporciona un entorno para realizar procesos ETL (Extract, Transform, Load) y análisis de datos.
+Este proyecto implementa una infraestructura completa de ingeniería de datos utilizando Docker, Jupyter Notebooks, PostgreSQL, Python y Metabase. Proporciona un entorno para realizar procesos ETL (Extract, Transform, Load), análisis de datos y visualización mediante dashboards interactivos.
 
 ## Estructura del Proyecto
 
@@ -9,7 +9,7 @@ proyecto-ingenieria-datos/
 ├── docker/              # Configuraciones de Docker
 │   ├── Dockerfile
 │   ├── docker-compose.yml
-│   └── .env
+│   └── metabase/        # Configuración de Metabase
 ├── notebooks/           # Jupyter Notebooks para análisis
 │   ├── 01_exploracion_datos.ipynb
 │   └── 02_proceso_etl.ipynb
@@ -28,6 +28,11 @@ proyecto-ingenieria-datos/
 │   ├── schema.sql     # Esquema de la base de datos
 │   ├── queries/       # Consultas SQL
 │   └── views/         # Vistas SQL
+├── metabase/            # Visualización de datos con Metabase
+│   ├── templates/     # Plantillas predefinidas
+│   ├── queries/       # Consultas SQL para dashboards
+│   ├── scripts/       # Scripts de automatización
+│   └── docs/          # Documentación de Metabase
 ├── tests/              # Pruebas unitarias
 ├── requirements.txt    # Dependencias de Python
 └── README.md           # Documentación del proyecto
@@ -82,6 +87,44 @@ El proyecto incluye dos notebooks de ejemplo:
 1. **01_exploracion_datos.ipynb**: Muestra cómo conectarse a la base de datos y realizar análisis exploratorio
 
 2. **02_proceso_etl.ipynb**: Implementa un proceso ETL completo con datos de ejemplo
+
+## Visualización con Metabase
+
+### Arquitectura de visualización
+
+```
++-------------------+    +-------------------+    +-------------------+
+|   ETL Pipeline    |    |   PostgreSQL DB   |    |     Metabase      |
+| (Python/Jupyter)  |--->| (Docker Container)|<---| (Dashboards)      |
++-------------------+    +-------------------+    +-------------------+
+          |                       |                        |
+          v                       v                        v
+    Extracción de           Almacenamiento          Visualización y
+    datos y proceso         centralizado            análisis de datos
+    de transformación       de datos                para stakeholders
+```
+
+El proyecto integra Metabase, una herramienta de visualización de código abierto, que permite crear dashboards interactivos a partir de los datos procesados.
+
+### Acceso a Metabase
+
+1. **Iniciar los servicios con Docker Compose** (si aún no lo ha hecho)
+   ```bash
+   cd proyecto-ingenieria-datos/docker
+   docker-compose up -d
+   ```
+
+2. **Acceder a la interfaz web de Metabase**
+   - Abra su navegador y vaya a [http://localhost:3000](http://localhost:3000)
+   - Siga las instrucciones de configuración inicial
+
+### Funcionalidades principales
+
+- **Dashboards predefinidos**: Consultas SQL listas para usar en la carpeta `metabase/queries/`
+- **Carga de datos de ejemplo**: Script Python para generar datos simulados
+- **Respaldo de configuración**: Herramientas para exportar dashboards y consultas
+
+Para más detalles, consulte la documentación en `metabase/docs/`.
 
 ## Personalización
 

@@ -1,0 +1,105 @@
+{
+  "name": "Conexiu00f3n PostgreSQL ETL",
+  "description": "Configuraciu00f3n de conexiu00f3n a la base de datos PostgreSQL del proyecto ETL",
+  "connectionDetails": {
+    "server": "localhost",
+    "database": "postgres",
+    "port": 5432,
+    "authentication": {
+      "type": "UsernamePassword",
+      "username": "${POSTGRES_USER}",
+      "password": "${POSTGRES_PASSWORD}"
+    }
+  },
+  "tables": [
+    {
+      "name": "raw_data",
+      "columns": [
+        {
+          "name": "id",
+          "dataType": "int"
+        },
+        {
+          "name": "source",
+          "dataType": "string"
+        },
+        {
+          "name": "data",
+          "dataType": "string"
+        },
+        {
+          "name": "timestamp",
+          "dataType": "dateTime"
+        }
+      ]
+    },
+    {
+      "name": "processed_data",
+      "columns": [
+        {
+          "name": "id",
+          "dataType": "int"
+        },
+        {
+          "name": "processed_value",
+          "dataType": "decimal"
+        },
+        {
+          "name": "category",
+          "dataType": "string"
+        },
+        {
+          "name": "processed_date",
+          "dataType": "dateTime"
+        }
+      ]
+    },
+    {
+      "name": "final_data",
+      "columns": [
+        {
+          "name": "id",
+          "dataType": "int"
+        },
+        {
+          "name": "metric_name",
+          "dataType": "string"
+        },
+        {
+          "name": "metric_value",
+          "dataType": "decimal"
+        },
+        {
+          "name": "dimension1",
+          "dataType": "string"
+        },
+        {
+          "name": "dimension2",
+          "dataType": "string"
+        },
+        {
+          "name": "report_date",
+          "dataType": "dateTime"
+        }
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "name": "raw_to_processed",
+      "fromTable": "raw_data",
+      "fromColumn": "id",
+      "toTable": "processed_data",
+      "toColumn": "id",
+      "crossFilteringBehavior": "bothDirections"
+    },
+    {
+      "name": "processed_to_final",
+      "fromTable": "processed_data",
+      "fromColumn": "id",
+      "toTable": "final_data",
+      "toColumn": "id",
+      "crossFilteringBehavior": "bothDirections"
+    }
+  ]
+}
