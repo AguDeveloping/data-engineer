@@ -24,5 +24,36 @@ services:
       - postgres_data:/var/lib/postgresql/data
       - ../sql/schema.sql:/docker-entrypoint-initdb.d/schema.sql
 
+  metabase:
+    image: metabase/metabase:latest  # Usar la imagen oficial sin modificar
+    ports:
+      - "3000:3000"  # Puerto para acceder a la interfaz web de Metabase
+    depends_on:
+      - db
+    environment:
+      - MB_DB_TYPE=postgres
+      - MB_DB_DBNAME=dataengineering
+      - MB_DB_PORT=5432
+      - MB_DB_USER=postgres
+      - MB_DB_PASS=postgres
+      - MB_DB_HOST=db
+    volumes:
+      - metabase_data:/metabase-data  # Persistencia para la configuración de Metabase
+
+  python-scripts:
+    build: ./metabase  # Construir el contenedor de Python desde el Dockerfile
+    depends_on:
+      - db
+    environment:
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_NAME=dataengineering
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+    volumes:
+      - ../metabase/scripts:/app/scripts  # Carpeta de scripts compartida
+      - ../metabase/queries:/app/queries  # Carpeta de consultas compartida
+
 volumes:
   postgres_data:
+  metabase_data:
