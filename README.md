@@ -145,6 +145,16 @@ Si desea contribuir a este proyecto, por favor:
 4. Envíe los cambios a su fork (`git push origin feature/nueva-funcionalidad`)
 5. Cree un Pull Request
 
+
+## Chinook Database
+
+El proyecto incluye el esquema de la base de datos Chinook, que se encuentra en `chinook-database/ChinookDatabase/ChinookDatabase.sql`.
+El comando para importar la base de datos es el siguiente:
+
+```bash
+docker exec -i docker-db-1 psql -U postgres -d dataengineering < c:\INGENIERIA-DATOS\proyecto-ingenieria-datos\chinook-database\ChinookDatabase\DataSources\Chinook_PostgreSql.sql
+```
+
 ## Licencia
 
 Este proyecto está disponible bajo la licencia MIT.
