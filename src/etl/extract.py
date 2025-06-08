@@ -32,7 +32,7 @@ def extract_from_csv(file_path, source_name):
         # Insertar en la base de datos
         with engine.connect() as conn:
             result = conn.execute(
-                "INSERT INTO raw_data (timestamp, source, data) VALUES (:timestamp, :source, :data)",
+                "INSERT INTO raw_data (timestamp, source, data) VALUES (%(timestamp)s, %(source)s, %(data)s)",
                 records
             )
         
@@ -74,7 +74,7 @@ def extract_from_api(api_url, params=None, source_name="api"):
         # Insertar en la base de datos
         with engine.connect() as conn:
             conn.execute(
-                "INSERT INTO raw_data (timestamp, source, data) VALUES (:timestamp, :source, :data)",
+                "INSERT INTO raw_data (timestamp, source, data) VALUES (%(timestamp)s, %(source)s, %(data)s)",
                 record
             )
         
