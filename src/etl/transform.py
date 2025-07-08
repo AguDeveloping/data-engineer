@@ -11,7 +11,7 @@ def transform_raw_data(raw_data_id=None):
         raw_data_id (int, optional): ID del registro a transformar. Si es None, procesa todos los registros no procesados.
     
     Returns:
-        int: Nu00famero de registros transformados
+        int: Número de registros transformados
     """
     try:
         # Construir la consulta SQL

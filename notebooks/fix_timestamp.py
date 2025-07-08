@@ -15,7 +15,7 @@ for _, row in df.iterrows():
     # Preparar la consulta de inserción
     insert_query = text("""
         INSERT INTO raw_data (timestamp, source, data)
-        VALUES (:timestamp, :source, :data)
+        VALUES (%(timestamp)s, %(source)s, %(data)s)
     """)
     
     # Ejecutar la consulta
