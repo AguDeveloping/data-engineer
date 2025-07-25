@@ -15,6 +15,7 @@ def extract_from_csv(file_path, source_name):
     Returns:
         int: Número de registros extraídos
     """
+    print("Extracting data from CSV file... prueba de volumen")
     try:
         # Leer el archivo CSV
         df = pd.read_csv(file_path)

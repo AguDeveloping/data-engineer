@@ -56,7 +56,7 @@ Esta solución incluye dos scripts principales para trabajar con Metabase:
 
 2. **respaldar_metabase.py**: Exporta dashboards, colecciones y configuraciones de Metabase. Uso:
    ```
-   docker exec -it proyecto-ingenieria-datos_python-scripts_1 python /app/scripts/respaldar_metabase.py --username admin@example.com --password tucontraseña
+   docker exec -it proyecto-ingenieria-datos_python-scripts_1 python /app/scripts/respaldar_metabase.py --username admin@example.com --password 1234
    ```
 
 La arquitectura utiliza dos contenedores Docker separados para una mejor separación de responsabilidades:
